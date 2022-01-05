@@ -10,11 +10,10 @@ using namespace std;
 class Solution{
     int MCM(int p[], int i, int j, vector<vector<int>>&A, vector<vector<string>>&B)
     {
-        if(i>=j)
-            return 0;
-        int ans = INT_MAX;
+        if(i>=j) return 0;
         if(A[i][j]!=-1) return A[i][j];
         
+        int ans = INT_MAX;
         for(int k=i; k<j; k++)
         {
             int y = MCM(p, i, k, A, B) + MCM(p, k+1, j, A, B) + p[i-1]*p[k]*p[j];
@@ -22,36 +21,28 @@ class Solution{
             {
                 ans = y;
                 if(i==k && j==k+1)
-                {
                     B[i][j]="(XX)";
-                }
                 else if(i==k)
-                {
                     B[i][j]="(X"+ B[i][k] + B[k+1][j] +")";
-                }
                 else if(j==k+1)
-                {
-                    B[i][j]="("+ B[i][k] + B[k+1][j] +"X)";   
-                }
+                    B[i][j]="("+ B[i][k] + B[k+1][j] +"X)";  
                 else
-                {
-                    B[i][j]="("+ B[i][k] + B[k+1][j] +")";
-                }
+                    B[i][j]="("+ B[i][k] + B[k+1][j] +")";  
             }
         }
-        A[i][j]=ans;
-        return ans;
+        
+        A[i][j] = ans;
+        return A[i][j];
     }
 public:
     string matrixChainOrder(int p[], int n){
         // code here
         if(n==2) return "A";
-        // if(n==3) return "AB";
+
         vector<vector<int>>A(n, vector<int>(n, -1));
         vector<vector<string>>B(n, vector<string>(n));
         
-        int x = MCM(p, 1, n-1, A, B);
-        
+        MCM(p, 1, n-1, A, B);
         
         string s = B[1][n-1];
         
@@ -60,7 +51,6 @@ public:
         {
             if(s[i]=='X')
                 s[i]=a++;
-                
         }
         
         return s;
