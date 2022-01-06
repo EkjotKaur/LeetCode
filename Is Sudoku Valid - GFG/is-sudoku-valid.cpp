@@ -9,33 +9,43 @@ using namespace std;
 
 class Solution{
 public:
-    int isValid(vector<vector<int>> mat){
+       int isValid(vector<vector<int>> mat){
         // code here
-        int A[9][9], B[9][9], C[3][3][9];
-        memset(A, 0, sizeof(A));
-        memset(B, 0, sizeof(B));
-        memset(C, 0, sizeof(C));
-         
+        
         for(int i=0; i<9; i++)
         {
+            int A[10], B[10];
+            memset(A, 0, sizeof(A));
+            memset(B, 0, sizeof(B));
             for(int j=0; j<9; j++)
             {
-                if(mat[i][j]<=0) continue;
-            
-                int n = mat[i][j]-1;
+                if(mat[i][j]>0 && A[mat[i][j]]>0)
+                    return 0;
+                A[mat[i][j]]++;
                 
-                if(A[i][n]==1) return 0;
-                A[i][n]=1;
-                
-                if(B[j][n]==1) return 0;
-                B[j][n]=1;
-                
-                if(C[i/3][j/3][n]==1) return 0;
-                C[i/3][j/3][n]=1;
-                
+                if(mat[j][i]>0 && B[mat[j][i]]>0) 
+                    return 0;
+                B[mat[j][i]]++;
             }
         }
-       
+            
+        for(int i=0; i<9; i+=3)
+        {
+            for(int j=0; j<9; j+=3)
+            {
+                int A[10];
+                memset(A, 0, sizeof(A));
+                for(int k=i; k<i+3; k++)
+                {
+                    for(int l=j; l<j+3; l++)
+                    {
+                        if(mat[k][l]>0 && A[mat[k][l]]>0) 
+                            return 0;
+                        A[mat[k][l]]++;
+                    }
+                }
+            }
+        }
 
         return 1;
     
