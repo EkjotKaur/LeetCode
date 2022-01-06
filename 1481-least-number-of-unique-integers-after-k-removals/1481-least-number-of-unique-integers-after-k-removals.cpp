@@ -3,21 +3,27 @@ public:
     int findLeastNumOfUniqueInts(vector<int>& arr, int k) {
         unordered_map<int,int>h;
         
-        for(int i=0; i<arr.size(); i++)
+        int n=arr.size();
+        for(int i=0; i<n; i++)
             h[arr[i]]++;
 
-        priority_queue<int, vector<int>, greater<int>>p;
+        // priority_queue<int, vector<int>, greater<int>>p;
+        int c = h.size();
+        vector<int>p;
         
         for(auto i:h)
-            p.push(i.second);
-        
-        while(k>=p.top() && !p.empty())
+            p.push_back(i.second);
+    
+        sort(p.begin(), p.end());
+        int x=c;
+        for(int i=0; i<c && k>=p[i]; i++)
         {
-            k-=p.top();
-            p.pop();
+            k-=p[i];
+            // cout<<p[i]<<" ";
+            x--;
         }
         
-        return p.size();
+        return x;
         
     }
 };
