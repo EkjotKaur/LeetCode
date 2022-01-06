@@ -1,5 +1,5 @@
 # Is Sudoku Valid
-## Medium 
+##  Medium 
 <div class="problem-statement">
                 <p></p><p><span style="font-size:18px">Given an&nbsp;incomplete Sudoku&nbsp;configuration in terms of a 9x9 &nbsp;2-D square matrix(<strong>mat[][]</strong>)&nbsp;the task to check if the current configuration is valid or not where a 0 represents an empty block.<br>
 <strong>Note:</strong> Current valid configuration does not ensure validity of the final solved sudoku.&nbsp;<br>
