@@ -1,10 +1,19 @@
 class Solution {
+    int m,n,c;
+    void solve(vector<vector<int>>& grid,  queue<vector<int>>&Q, int i, int j, int time)
+    {
+        if(i<0 || i>=n || j<0 || j>=m || grid[i][j]!=1) return ;
+        grid[i][j]=2;
+        Q.push({i, j, time+1});
+        c--;
+    }
 public:
     int orangesRotting(vector<vector<int>>& grid) {
         
         queue<vector<int>>Q;
         
-        int n=grid.size(), m=grid[0].size(),c=0, t=0;
+        n=grid.size(), m=grid[0].size(), c=0;
+        int t=0;
        
         for(int i=0; i<n; i++)
         {
@@ -23,33 +32,13 @@ public:
             int i=Q.front()[0];
             int j=Q.front()[1];
             int time = Q.front()[2];
-            int x = c;
             Q.pop();
             t=time;
-            if(i!=0 && grid[i-1][j]==1)
-            {
-                c--;
-                grid[i-1][j]=2;
-                Q.push({i-1, j, time+1});
-            }
-            if(j!=0 && grid[i][j-1]==1)
-            {
-                c--;
-                grid[i][j-1]=2;
-                Q.push({i, j-1, time+1});
-            }
-            if(i!=n-1 && grid[i+1][j]==1)
-            {
-                c--;
-                grid[i+1][j]=2;
-                Q.push({i+1, j, time+1});
-            }
-            if(j!=m-1 && grid[i][j+1]==1)
-            {
-                c--;
-                grid[i][j+1]=2;
-                Q.push({i, j+1, time+1});
-            }
+            solve(grid, Q, i-1, j, time);
+            solve(grid, Q, i, j-1, time);
+            solve(grid, Q, i+1, j, time);
+            solve(grid, Q, i, j+1, time);
+           
         }
         
         if(c>0) return -1;
