@@ -4,13 +4,10 @@ class Solution {
     {
         if(k>=n) return 0;
         int ans=0;
-        // cout<<i<<j<<" ";
         if(i<0 || j<0 || i>=m || j>=m) return 0;
         if(B[k][i][j]!=-1) return B[k][i][j];
-        if(i!=j)
-            ans+=grid[k][i]+grid[k][j];
-        else
-            ans+=grid[k][i];
+        
+        ans=(i!=j)?grid[k][i]+grid[k][j]:grid[k][i];
 
         int A=0;
         for(int ii=-1; ii<=1; ii++)
