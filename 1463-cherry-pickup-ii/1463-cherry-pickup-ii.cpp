@@ -11,23 +11,15 @@ class Solution {
             ans+=grid[k][i]+grid[k][j];
         else
             ans+=grid[k][i];
-        // cout<<ans<<" ";
+
+        int A=0;
+        for(int ii=-1; ii<=1; ii++)
+        {
+            for(int jj=-1; jj<=1; jj++)
+                A=max(A, solve(grid, i+ii, j+jj, k+1, B));
+        }
         
-        vector<int>A(9);
-        A[0] = solve(grid, i, j, k+1, B);
-        A[1] = solve(grid, i-1, j, k+1, B);
-        A[2] = solve(grid, i+1, j, k+1, B);
-        A[3] = solve(grid, i, j-1, k+1, B);
-        A[4] = solve(grid, i-1, j-1, k+1, B);
-        A[5] = solve(grid, i+1, j-1, k+1, B);
-        A[6] = solve(grid, i, j+1, k+1, B);
-        A[7] = solve(grid, i-1, j+1, k+1, B);
-        A[8] = solve(grid, i+1, j+1, k+1, B);
-        
-        sort(A.begin(), A.end());
-        
-        // cout<<A[8]<<"   ";
-        B[k][i][j] = ans+A[8];
+        B[k][i][j] = ans+A;
         return B[k][i][j];
             
     }
