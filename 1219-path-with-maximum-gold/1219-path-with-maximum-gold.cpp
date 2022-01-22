@@ -2,7 +2,6 @@ class Solution {
     int m, n;
     int solve(vector<vector<int>>& grid, int i, int j)
     {
-        // cout<<grid[i][j]<<" ";
         if(i<0 || j<0 || i>=m || j>=n || grid[i][j]==0)
             return 0;
         
@@ -12,19 +11,19 @@ class Solution {
         
         ans += max(max(solve(grid, i-1, j), solve(grid, i, j-1)),max(solve(grid, i, j+1), solve(grid, i+1, j)));
         grid[i][j]=x;
-        // cout<<ans<<" ";
         return ans;
         
     }
 public:
     int getMaximumGold(vector<vector<int>>& grid) {
-        int ans=INT_MIN;
+        int ans=0;
         m=grid.size(), n=grid[0].size();
         for(int i=0; i<m; i++)
         {
             for(int j=0; j<n; j++)
             {
-                ans=max(ans, solve(grid, i, j));
+                if(grid[i][j]!=0)
+                    ans=max(ans, solve(grid, i, j));
             }
         }
         
