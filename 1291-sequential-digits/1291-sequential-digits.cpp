@@ -10,18 +10,16 @@ public:
         }
         vector<int>A;
         int x = pow(10,digit-1);
-        int m=n, j=i;
-        // cout<<x<<" ";
-        while(m<=high && j<=10)
+
+        for(int m=n, j=i; m<=high && j<=10;)
         {
-            while(n<=high && i<=10)
+            for(;n<=high && i<=10;)
             {
                
                 if(n>=low && n<=high)
                     A.push_back(n);
                 n%=x;
                 n=n*10+i;
-                // cout<<n<<" ";
                 i++;
 
             }
