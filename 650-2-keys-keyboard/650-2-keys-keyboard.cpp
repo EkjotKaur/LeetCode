@@ -1,24 +1,15 @@
 class Solution {
 public:
     int minSteps(int n) {
-        if(n<2) return 0;
-        vector<int>A(n+1, INT_MAX);
-        A[0]=0;
-        A[1]=0;
-        A[2]=2;
-        
-        for(int i=3; i<=n; i++)
+        int ans=0, i=2;
+        for(i=2;n>1;i++)
         {
-           for(int j=2; j*j<=n; j++)
-           {
-               int x = i/j;
-               if(x*j==i)
-                   A[i]=min(A[x]+j,A[i]);
-            }
-            if(A[i]==INT_MAX) 
-                A[i]=i;
+            while(n%i==0)
+            {
+                ans+=i;
+                n/=i;
+            } 
         }
-        
-        return A[n];
+        return ans;
     }
 };
